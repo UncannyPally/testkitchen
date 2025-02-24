@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameterized URL Launcher</title>
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+    <script>
+        // Function to get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            let paramObj = {};
+            params.forEach((value, key) => {
+                paramObj[key] = value;
+            });
+            return paramObj;
+        }
+        
+        // Function to launch a new URL with the captured parameters
+        function launchNewPage() {
+            const params = getUrlParams();
+            const baseUrl = "https://irexut1.hylandcloud.com/241appnet/docpop/docpop.aspx";
+            const queryString = `KT379_0_0_0=${params.param1 || ''}&KT377_0_0_0=${params.param2 || ''}&cqid=110`;
+            const finalUrl = `${baseUrl}?${queryString}`;
+            window.open(finalUrl, '_blank');
+        }
+    </script>
+</head>
+<body>
+    <h1>Launch Parameterized URL</h1>
+    <button onclick="launchNewPage()">Launch New Page</button>
+</body>
+</html>
