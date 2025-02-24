@@ -28,17 +28,31 @@
             return paramObj;
         }
         
-        // Function to launch a new URL with the captured parameters
+        // Function to launch a new URL with dynamic parameter names and values
         function launchNewPage() {
             const params = getUrlParams();
             const baseUrl = "https://irexut1.hylandcloud.com/241appnet/docpop/docpop.aspx";
-            const queryString = `KT379_0_0_0=${params.param1 || ''}&KT377_0_0_0=${params.param2 || ''}&cqid=110`;
+            let queryString = Object.entries(params)
+                .filter(([key]) => key !== "buttonLabel") // Exclude button label from URL parameters
+                .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                .join("&");
+
             const finalUrl = `${baseUrl}?${queryString}`;
             window.open(finalUrl, '_blank');
         }
+
+        // Function to update the button label dynamically
+        function updateButtonLabel() {
+            const params = getUrlParams();
+            const buttonLabel = params.buttonLabel || "View Document"; // Default if not provided
+            document.getElementById("launchButton").textContent = buttonLabel;
+        }
+
+        // Set button label when page loads
+        window.onload = updateButtonLabel;
     </script>
 </head>
 <body>
-    <button onclick="launchNewPage()">View Invoice</button>
+    <button id="launchButton" onclick="launchNewPage()">View Document</button>
 </body>
 </html>
