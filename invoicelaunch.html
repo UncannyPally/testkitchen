@@ -31,7 +31,7 @@
         // Function to launch a new URL with dynamic parameter names and values
         function launchNewPage() {
             const params = getUrlParams();
-            const baseUrl = "https://irexut1.hylandcloud.com/241appnet/docpop/docpop.aspx";
+            const baseUrl = "https://irex.hylandcloud.com/241appnet/docpop/docpop.aspx";
             let queryString = Object.entries(params)
                 .filter(([key]) => key !== "buttonLabel") // Exclude button label from URL parameters
                 .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
